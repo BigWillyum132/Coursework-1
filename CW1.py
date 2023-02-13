@@ -105,13 +105,22 @@ def check_solution(grid_input):
 	'''
 	import numpy as np
 	def check_rows(vals):
+		"""
+		this function checks if the numbers are unique, and add up to the right number.
+		
+		"""
 		for i in vals:
 			
-			#print(i)
+			
 			if (sum(i) != sum_to_add) or (len(i) != len(set(i))):
 				return False
 		return True
 	def check_square(grid_input):
+		"""
+		this function makes a list of the different subgrids inside the sudoku, 
+		and returns a nested list of all of them to be checked.
+
+		"""
 		data, cols, rows = grid_input
 		sum_to_add = rows*cols
 		x = sum_to_add
@@ -121,14 +130,14 @@ def check_solution(grid_input):
 		final_list = []
 		for gridx in range(rows):
 			for griddy in range(cols):
-				#print('hit da griddy')
+				
 				square_list = []
 				for i in np.arange(cols):  
 					for j in np.arange(rows):
 							datapoint = data[i+gridx*cols][j+griddy*rows]
-							#print(i+gridx*cols,j+griddy*rows)
+							
 							square_list.append(datapoint)
-				print(square_list)
+				
 				final_list.append(square_list)
 		return final_list
 	data, cols, rows = grid_input
@@ -139,7 +148,7 @@ def check_solution(grid_input):
 		sum_to_add += x
 	data_squares = check_square(grid_input)
 	data_trans = list(map(list,zip(*data)))
-	#print(data_trans)
+	
 	
 	if not(check_rows(data) and check_rows(data_trans) 
 			and check_rows(data_squares)):
